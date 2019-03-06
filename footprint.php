@@ -1,17 +1,15 @@
 <?php
+session_start();
+$_SESSION;
 define("FT", "footprint");
 
 include("metaHead.php");
 include("Product.php");
 
-
 $prod=new Product;
 
-
 ?>
-<!-- styles -->
-<!-- title -->
-<!-- /head -->
+
 <link rel="stylesheet" href="footprint.css">
 <title> <?php echo FT ?></title>
 </head>
@@ -21,7 +19,7 @@ $prod=new Product;
 <div class="container-fluid" style="/*padding-right: 0px; padding-left:0px;*/overflow: hidden;">
 
 
-  <!-- Rustle Menu -->
+  <!-- Rustle Banner -->
 <div class="row px-1 d-flex justify-content-between align-items-grid" id="rustle-menu" style="background-color: #141428/*background-image:url('images/sneakers/productbg.jpg')*/;">
 
   <div class="col-md-12 d-flex align-items-grid" style="height:45px;">
@@ -31,7 +29,21 @@ $prod=new Product;
       <li><a href="#">Customer Service</a></li>
       <li><a href="#">Store Finder</a></li>
       <li><a href="#">About</a></li>
-      <li><a href="login&regft.php">Login / Register?</a></li>
+      <li>
+      <?php
+      if (isset($_SESSION['cust_name'])){
+        echo $_SESSION['cust_name'];
+        echo "<a href='logout.php'>";
+        echo "Logout";
+
+      }
+      else{
+      echo "<a href='login&regft.php'>";
+        echo "Login / Register?";
+      }
+
+      ?>
+      </a></li>
     </ul>
 </nav>
     </div>
@@ -48,11 +60,9 @@ $prod=new Product;
 <div class="col-md-4"></div>
 
 <div class="col-md-12 d-flex justify-content-center" style="height:35px">A home of sneakers
+</div>
 
-    </div>
-
-
-<!-- ending Rustle Menu -->
+<!-- ending Rustle welcome banner -->
     </div>
 
 
@@ -65,16 +75,24 @@ $prod=new Product;
 </div>
 
 <div class="row">
-  <nav class="navtwk">
-      <div class="logo-cont mr-auto" >
+<!-- <div class="col-12"> -->
+  <nav class="navtwk" >
 
+   <ul class="nav-0-list ml-auto">
+      <li><a href="login&regft.php"><i class="fa fa-user"></i>&nbsp;Login / Register?</a></li>
+      <li><a href="#">Cart <i class="fa fa-shopping-cart"></i><span class="itnum"> 0</span></a></li>
+
+    </ul>
+
+      <div class="logo-cont mr-auto">
+
+      <div style="overflow: hidden;">
       <a href="footprint.php" id="rustle" class=" navbar-brand"><span>Rus</span><span class="tle">tle</span></a>
+      </div>
 
-      <div class="navformdiv">
-      <input type="search" name="navsearch" placeholder=" Search Footprint" class="navinput"/>
-
-      <button type="submit"
-      class="btn navsubmit">find</button>
+      <div class=" input-group navformdiv">
+      <input type="search" name="navsearch" placeholder=" Search Footprint" class="navinput">
+      <a type="submit" class="btn btn-outline-secondary navsubmit"><i class="fa fa-search"></i></a>
       </div>
 
       </div>
@@ -91,19 +109,12 @@ $prod=new Product;
   </ul>
 </nav>
 
- <ul class="nav-0-list ml-auto mt-auto">
-      <li><a href="login&regft.php"><i class="fa fa-user"></i>&nbsp;Login / Register?</a></li>
-      <li><a href="#">Cart <i class="fa fa-shopping-cart"></i><span class="itnum"> 0</span></a></li>
-
-    </ul>
-
 
 
 
     </nav>
-
-
 </div>
+
 <!-- sticky-top -->
 
 

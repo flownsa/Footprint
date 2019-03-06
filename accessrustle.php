@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 /*
 
 ------  This is the homepage for registered users
@@ -9,7 +10,7 @@ session_start();
 
 */
 require("metaHead.php");
-include("Customer.php");
+require("Customer.php");
 
 // <!-- styles -->
 

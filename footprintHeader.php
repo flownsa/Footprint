@@ -7,30 +7,30 @@
 <div class="row">
 
 
-<nav class="navtwk  newnav">
-      <div class="logo-cont" >
+<nav class="navtwk" >
 
+   <ul class="nav-0-list ml-auto">
+      <li><a href="login&regft.php"><i class="fa fa-user"></i>&nbsp;Login / Register?</a></li>
+      <li><a href="#">Cart <i class="fa fa-shopping-cart"></i><span class="itnum"> 0</span></a></li>
 
+    </ul>
 
-      <a href="footprint.php" id="rustle" class=" navbar-brand">Rus</span><span style="color:#882D17;">tle</span></a>
+      <div class="logo-cont mr-auto">
 
-      <div class="navformdiv align-self-center ">
-      <input type="search" name="search" placeholder=" Search Footprint" class="navinput"/>
+      <div style="overflow: hidden;">
+      <a href="footprint.php" id="rustle" class=" navbar-brand"><span>Rus</span><span class="tle">tle</span></a>
+      </div>
 
-      <button type="submit"
-      class="btn navsubmit">find</button>
+      <div class=" input-group navformdiv">
+      <input type="search" name="navsearch" placeholder=" Search Footprint" class="navinput">
+      <a type="submit" class="btn btn-outline-secondary navsubmit"><i class="fa fa-search"></i></a>
       </div>
 
       </div>
 
 
-
-
-
-
-
-    <nav class="main-nav mr-auto mt-auto">
-  <ul class="mainnavlist">
+    <nav class="main-nav mr-auto align-self-end">
+  <ul class="mainnavlist" >
     <li><a href="#">MEN</a></li>
     <li><a href="#">WOMEN</a></li>
     <li><a href="#">BRANDS</a></li>
@@ -39,11 +39,9 @@
     <li><a href="accessrustle.php">SNEAKER NEST</a></li>
   </ul>
 </nav>
- <ul class="nav-0-list nav-0-list2 ml-auto mt-auto">
-      <li><a href="login&regft.php"><i class="fa fa-user"></i>&nbsp;Login / Register?</a></li>
-      <li><a href="#">Cart <i class="fa fa-shopping-cart"></i><span class="itnum"> 0</span></a></li>
 
-    </ul>
+
+
 
     </nav>
 
