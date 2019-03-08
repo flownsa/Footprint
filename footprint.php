@@ -51,10 +51,7 @@ $prod=new Product;
 
 <div class="col-md-4"></div>
 <div class="col-md-4 d-flex">
-
    <a href="footprint.php" id="rustleBig" class=" align-self-center justify-self-center navbar-brand mx-auto">Rus<span class="tle">tle</span></a>
-
-
 </div>
 
 <div class="col-md-4"></div>
@@ -68,15 +65,13 @@ $prod=new Product;
 
 <div class="row d-flex align-items-grid bg-dark" >
 
-<div class="col-md-12 text-center text-light">
-  advertise here
-</div>
+<div class="col-md-12 text-center text-light">advertise here</div>
 
 </div>
 
 <div class="row">
 <!-- <div class="col-12"> -->
-  <nav class="navtwk" >
+  <nav class="navtwk">
 
    <ul class="nav-0-list ml-auto">
       <li><a href="login&regft.php"><i class="fa fa-user"></i>&nbsp;Login / Register?</a></li>
@@ -115,18 +110,85 @@ $prod=new Product;
     </nav>
 </div>
 
+
+
+<!-- images of products CARDS -->
+  <div class="row py-3" style="background-color:brown; height:465px; opacity:0.7; box-shadow: 0em 1em 0.5em black; overflow:hidden">
+    <div class="col-md-6 advertBlock">
+    <div class="advertDisplay bg-light">
+
+        <div id="display-gallery" class="carousel carousel-fade slide" data-ride="carousel">
+          <!-- indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#display-gallery" class="active" data-slide-to="0"></li>
+              <li data-target="#display-gallery" data-slide-to="1"></li>
+              <li data-target="#display-gallery" data-slide-to="2"></li>
+            </ol>
+  <!-- inner carousel -->
+            <div class="carousel-inner">
+
+              <div class="carousel-item active">
+                <img class="d-block w-100 img-fluid" src="images/redstar.jpg" alt="allstar">
+              </div>
+
+              <div class="carousel-item">
+                <img class="d-block w-100 img-fluid" src="images/sneakersketch.jpg" alt="sneakskt">
+              </div>
+
+               <div class="carousel-item">
+                <img class="d-block w-100 img-fluid" src="images/classyBrown.jpg" alt="sneakskt">
+              </div>
+
+            </div> <!-- ends carousel inner-->
+
+            <!-- controls -->
+
+            <a href="#display-gallery" class="carousel-control-prev" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true">
+              </span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <!-- Nexxt -->
+            <a href="#display-gallery" class="carousel-control-next" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+            </a>
+
+      </div>  <!-- carousel tail-->
+
+  <!-- </div> -->
+<!-- closing big display row -->
+  </div>
+
+
+
+    </div>
+
+
+<div class="col-md-6 advertBlock">
+    <div class="advertDisplay bg-light text-center">
+    <h4>Rustle With me ?</h4>
+    <div>
+        <img class="d-block h-100 w-100 img-fluid" src="images/navbarflip.jpeg">
+    </div>
+    </div>
+    </div>
+
+
+</div>
+
 <!-- sticky-top -->
 
 
 <!-- container space -->
-
+<!-- card-ad -->
 
 
 
 <!-- product display grid -->
 
 <div class="row top-framer">
-<div class="col-12 framer m-2 p-3" style="opacity:1; border-radius:10px">
+<div class="col-12 framer m-2 p-3" style="opacity:1;">
 <div class="row product-framer no-gutters p-3">
 
 <div class="col-12 text-light text-center mt-5">
@@ -150,26 +212,26 @@ $pro_cont=$prod->get_all_products();
   for($c=0; $c<count($pro_cont); $c++){
     $nw=$pro_cont[$c];
     for($n=0; $n<count($nw); $n++) {
-
-// contains all product info and click to order
-    echo "<div class='item-frame'>";
-      echo "<div class='info-frame'>";
-
-      echo "<img src='$nw[3]' class='img-item'>";
-
-      echo "<p class='item-name'>$nw[1]</p>";
-      echo "<p class='item-price'>$nw[2]</p>";
-      echo "<span class='btn btn-primary likebtn'>Like</span>";
-      echo "<a href='viewandorder.php?id=$nw[0]' class='order-item text-light btn btn-outline-secondary'>View</a>";
+      ?>
 
 
-      echo "</div>";
-      echo "</div>";
+    <div class='card item-frame'>
+    <div class='card-body info-frame text-center'>
+    <div class="text-center">
 
+    <img src='<?php echo $nw[3];?>' class='img-item img-fluid w-100'>
+    <h4 class="card-footer item-name rustleIntro"><?php echo $nw[1]; ?></h4>
+
+    <h4 class='item-price'><?php echo $nw[2]?></h4>
+    <span class='btn btn-primary likebtn'>Like</span>
+    <a href="viewandorder.php?id=<?php echo $nw[0]; ?>" class="text-light btn btn-outline-success">View</a>
+    </div>
+    </div>
+    </div>
+<?php
     }
-}
-
-?>
+  }
+    ?>
 
 
 
@@ -179,42 +241,10 @@ $pro_cont=$prod->get_all_products();
 
 
 
-
-  <div class="col-md-12 m-3 p-3" style="background-color:brown; height:auto; opacity:0.7; box-shadow:inset 0 0 10px #ccc;">
-    <h2> RAMBLINGS ON PRODUCTS AND SERVICES</h2><br><br>
-    <p></p>
-  </div>  <!-- end colm in row -->
-
-<!-- </div> -->
-
-  <!-- </div> -->
-
-  <!-- images of products CARDS -->
-  <div class="row">
-    <div class="col-md-6 d-flex align-items-stretch">
-    <div class="card card-ad">
-      <div class="card-body">
-      <h2 class="card-header">Shop Original Big feet Sneakers</h2>
-
-        <img class="d-block w-100 img-fluid"  src="images/sneakers/maxres.jpg">
-    </div>
-    </div>
-    </div>
-
-    <div class="col-md-6 d-flex align-items-stretch">
-      <div class="card card-ad">
-        <div class="card-body">
-        <h2 class="card-header"> Shop Our Original Wears at amazing discounts Give us a try..</h2>
-         <img class="d-block w-100 img-fluid" src="images/Vector.jpg" style="height:350px;">
-         </div>
-      </div>
-    </div>
-
+<div class="ftFooter">
+<!--  -->
 
 </div>
-
-
-<!-- </div> -->
 
 </div> <!-- exit container -->
 
@@ -240,7 +270,7 @@ $pro_cont=$prod->get_all_products();
 
 $(function(){
   $(".carted").click(function(){
-    // alert("I have been clicked o!");
+    alert("I have been clicked o!");
     x=$(".itnum").val();
     alert(x);
     // $(".itnum").val()=1;

@@ -21,6 +21,14 @@
 
       /*background-color: darkgreen;*/
     }
+    /*.twin-display{
+      height:450px;
+
+    }*/
+    .twin-display{
+      height:450px;
+
+    }
 
     .write-up{
       height: 150px;
@@ -35,14 +43,12 @@
       align-items: center;
       padding: 2px 2px 2px 2px;
       /*margin:1px 1px 1px 1px;*/
-      background-color: #141428;
+      background-color: #01050E;
       /*background-image:url('images/productbg.jpg');*/
 
 
     }
-    .order-item{
-      /*: flex-end;*/
-    }
+
     .order-conts{
       /*height: 650px;*/
       box-sizing: border-box;
@@ -92,7 +98,7 @@
       /*background-color: #462b2b;*/
       opacity:1;
       border-radius:0% 7% 0% 7%;
-      background-color: #9f2b68 /*darkgreen*/;
+      background-color: #01050E /*darkgreen*/;
 
     }
 
@@ -114,7 +120,7 @@
       color: white;
       /*border:1px solid;*/
       opacity: 0.8;
-      background-color: /*black*/ #462b2b;
+      background-color: /*black*/ #01050E;
       /*brown*/
 
 
@@ -201,6 +207,10 @@
         /*line-height:20px;*/
       }
 
+      .rustleIntro{
+
+      }
+
 
 
       .card-ad:hover{
@@ -240,7 +250,7 @@
 
 
   .navtwk{
-    overflow: none;
+    overflow: hidden;
     /*box-sizing: border-box;*/
     /*border:1px solid black;*/
     width: inherit;
@@ -252,9 +262,9 @@
       box-shadow: 0 0.5em 0.5em;
     position:relative;
     /*justify-content: space-between;*/
-    /*position: sticky;*/
-    /*top:280px;*/
-    background-color: white;
+    position: sticky;
+    top:280px;
+    background-color: #FFFACD;
     /**/
       }
 
@@ -300,7 +310,7 @@
 
       }
       .open-parg{
-        height:50px;
+        height:50px; /* a random heightened space*/
       }
 
 
@@ -364,6 +374,9 @@
           border-top:0.5em solid grey;
           background-color: white;
 
+      }
+      .advertDisplay{
+        height: 450px;
       }
 
       .logo-cont{

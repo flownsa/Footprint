@@ -11,7 +11,7 @@ class Product
   var $pro_price;
   var $pro_image;
   var $pro_brand;
-  var $pro_color;
+  var $pro_color=[];
   var $pro_style;
   var $pro_desc;
   var $stock_num=0;
@@ -29,10 +29,7 @@ class Product
 
     $run_q=$this->db_conn->query($q_exp);
 
-    // return $run_q->num_rows;
-
-
-    switch($run_q->num_rows>0){
+    switch($run_q){
 
       case false:
       echo "Product not found";
@@ -42,28 +39,11 @@ class Product
       case true:
       $all = $run_q->fetch_assoc();
 
-
       return $all;
 }
 }
 
-function views($v_pro, $v_cust)
-  {
-    $q_exp = "INSERT INTO viewd SET viewd_pro=$v_pro, viewd_cust_id=$v_cust";
 
-
-    $add_view = $this->db_conn->query($q_exp);
-    if(!$add_view){
-      // echo "Not viewed";
-      return 0;
-    }
-    else if ($add_view==true){
-      // echo "Viewed";
-      return 1;
-    }
-
-    // return $this->;
-  }
 
 
 
@@ -77,7 +57,7 @@ function views($v_pro, $v_cust)
     switch($run_q->num_rows<1) {
 
       case true:
-      echo "Product not found";
+      // echo "Product not found";
       return false;
       break;
 
@@ -119,16 +99,9 @@ function remove_product($pr_id)
 
     $run_q=$this->db_conn->query($q_exp);
 
-    if($this->db_conn->error) {
-      echo "error! check this";
-      return $this->db_conn->error;
-    }
-    while($all[]=$run_q -> fetch_row()){
+      while($all[]=$run_q->fetch_row()){
   }
   return $all;
-
-        // $this->display_product($row);
-
 }
 
   function add_product($pr_nm, $pr_prc, $pr_img, $pr_brn, $pr_sty, $pr_cat)
@@ -171,14 +144,14 @@ function remove_product($pr_id)
 
 // echo $pro_na;
 
-// $pro_names = $shoe -> get_all_products();
+// $pro_names = $shoe->get_all_products();
 
 
 //   echo '<pre>';
 //   print_r($pro_names);
 //   echo '</pre>';
 
-  //   $pro_na = $shoe -> find_product(35);
+  //   $pro_na = $shoe->find_product(35);
 
   // echo '<pre>';
   // print_r($pro_na);

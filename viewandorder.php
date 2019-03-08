@@ -2,27 +2,31 @@
 
 session_start();
 require("Product.php");
+  $new_pro = new Product;
+
+require("Customer.php");
 require("metaHead.php");
-/* <!-- styles -->
-
-
- <!-- title -->
+/*
      <!-- </head> -->
 */
 
   $pr_id = $_GET['id'];
 
-  $new_pro = new Product;
-  $pr_id=$_GET['id'];
+
+  // if(!$_SESSION){
+  // use cookies (IP ADDRESS as customer ID)
+  $cust = new Customer;
+  // }
+
   $pro=$new_pro->find_product($pr_id);
 
-  $pro_like=$new_pro->views(17, 9);
+  $cust_view=$cust->view($pr_id, $_SESSION["cust_id"]);
+
 
   echo "<link rel='stylesheet' href='footprint.css'>";
   echo "<title>viewproductFT</title>";
-// title included
 include("footprintHeader.php");
-// include("Order.php");
+// </head> included
 
 ?>
 
@@ -52,17 +56,15 @@ include("footprintHeader.php");
   // echo $pro['pro_color'];
   // echo $pro['pro_desc'];
   // echo $pro['pro_size'];
-
-  // CART
-  echo "<a class='btn btn-success'>Order</a>  ";
-  echo "<a id='carted' class='btn btn-primary carted'>Add to cart</a>";
-
-
-
-
-
-  echo "</p>";
   ?>
+
+   <!-- CART -->
+  <a class='btn btn-success'>Order</a>
+  <a href="carting.php?id=<?php $pro; ?>" id='carted' class='btn btn-primary carted'>Add to cart</a>
+
+
+</p>
+
 </div>
   <!-- left side -->
 

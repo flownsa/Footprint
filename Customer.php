@@ -2,7 +2,17 @@
 class Customer
 {
   var $db_conn;
-  var $cart=[];
+  var $cart_id;
+  // define("CART_ID", "$cart_id");
+
+  var $cart=[
+  CART_ID,
+  "product"=>[
+  "pro_id"=>[], "pro_price"=>[], "pro_quant"=>[]
+  ]
+
+  ];
+
   var $cust_id;
   var $cust_name;
   var $cust_nick;
@@ -47,7 +57,10 @@ class Customer
       break;
 
       default:
-    $this->cust_id=$this->db_conn->insert_id;
+    $this->cart_id=$this->cust_id=$this->db_conn->insert_id;
+
+    define("CART_ID", "$this->cart_id");
+
      echo $this->cust_name ." has been successfully registered.<br>";
       echo "UserId = ". $this->cust_id;
 
@@ -86,8 +99,12 @@ class Customer
   }
 }
 
-function add_to_cart($lk_item_id){
-  $this->cart[]=$lk_item_id;
+
+
+function add_to_cart($pro_id, $cust_id, $pro_quant, $pro_price){
+  $this->cart["product"]["pro_id"]=$this->cust_id;
+  $this->cart["product"]["pro_quant"]=$pro_quant;
+
   // $to_in_cart=count($this->cart);
 
 }
@@ -115,16 +132,26 @@ function add_to_cart($lk_item_id){
   {
 
 
-    // create order id, accounts cartid, customer id
-
-
-
+    // create order id, accounts cart_id, customer id
 
   }
-  function view($pro_id, $brn_id, $sty_id)
+
+  function view($v_pro, $v_cust)
   {
+    $q_exp = "INSERT INTO viewd SET viewd_pro=$v_pro, viewd_cust_id=$v_cust";
 
 
+    $add_view = $this->db_conn->query($q_exp);
+    if(!$add_view){
+      // echo "Not viewed";
+      return 0;
+    }
+    else if ($add_view===true){
+      // echo "Viewed";
+      return 1;
+    }
+
+    // return $this->;
   }
   function pay($ord_id, $sum_paid)
   {
