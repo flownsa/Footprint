@@ -69,6 +69,7 @@ $prod=new Product;
 
 </div>
 
+
 <div class="row">
 <!-- <div class="col-12"> -->
   <nav class="navtwk">
@@ -86,7 +87,7 @@ $prod=new Product;
       </div>
 
       <div class=" input-group navformdiv">
-      <input type="search" name="navsearch" placeholder=" Search Footprint" class="navinput">
+      <input type="search" name="navsearch" placeholder=" Search Footprint" id="navinput">
       <a type="submit" class="btn btn-outline-secondary navsubmit"><i class="fa fa-search"></i></a>
       </div>
 
@@ -109,6 +110,14 @@ $prod=new Product;
 
     </nav>
 </div>
+<!-- <div class="row bg-info">
+<div class="col-3"></div>
+  <div class="my-3 col-6 align-items-center">
+        <marquee>Don't miss out on Fashion Trends. Try out our blog on <strong>Rustle</strong>...</marquee>
+      </div>
+<div class="col-3"></div>
+
+</div> -->
 
 
 
@@ -167,7 +176,7 @@ $prod=new Product;
 
 <div class="col-md-6 advertBlock">
     <div class="advertDisplay bg-light text-center">
-    <h4>Rustle With me ?</h4>
+    <h4>Rustle ?</h4>
     <div>
         <img class="d-block h-100 w-100 img-fluid" src="images/navbarflip.jpeg">
     </div>
@@ -187,9 +196,9 @@ $prod=new Product;
 
 <!-- product display grid -->
 
-<div class="row top-framer">
-<div class="col-12 framer m-2 p-3" style="opacity:1;">
-<div class="row product-framer no-gutters p-3">
+<div class="row" style="background-color:gray;">
+<div class="col-12 m-2 p-3">
+<div class="row product-framer no-gutters p-3 m-3" id="product-framer">
 
 <div class="col-12 text-light text-center mt-5">
 <h3>ALL NEW WEARS</h3>
@@ -209,29 +218,25 @@ $prod=new Product;
 <?php
 
 $pro_cont=$prod->get_all_products();
-  for($c=0; $c<count($pro_cont); $c++){
-    $nw=$pro_cont[$c];
-    for($n=0; $n<count($nw); $n++) {
+    foreach($pro_cont as $item) {
       ?>
-
-
-    <div class='card item-frame'>
+    <div class='card item-frame' style="position: relative;
+      height:350px;flex:1 0 185px;">
     <div class='card-body info-frame text-center'>
     <div class="text-center">
 
-    <img src='<?php echo $nw[3];?>' class='img-item img-fluid w-100'>
-    <h4 class="card-footer item-name rustleIntro"><?php echo $nw[1]; ?></h4>
+    <img src='<?php echo $item["pro_image"];?>' class='img-item img-fluid w-100'>
+    <h4 class="card-footer item-name rustleIntro"><?php echo $item["pro_name"]; ?></h4>
 
-    <h4 class='item-price'><?php echo $nw[2]?></h4>
+    <h4 class='item-price'>&#8358;<?php echo $item["pro_price"]?></h4>
     <span class='btn btn-primary likebtn'>Like</span>
-    <a href="viewandorder.php?id=<?php echo $nw[0]; ?>" class="text-light btn btn-outline-success">View</a>
+    <a href="viewandorder.php?id=<?php echo $item["pro_id"];?>" class="text-light btn btn-outline-success">View</a>
     </div>
     </div>
     </div>
 <?php
-    }
   }
-    ?>
+?>
 
 
 
@@ -239,12 +244,18 @@ $pro_cont=$prod->get_all_products();
 </div>
 </div>
 
-
-
-<div class="ftFooter">
-<!--  -->
-
+<div class="row">
+  <div class="col-md-12 d-flex" style="background-image:url('images/footer/footnet.jpg')" class="img-fluid" alt="footnet.jpg");">
+  <!-- <div> -->
+    <!-- </div> -->
+  </div>
 </div>
+
+<div class="footer-frame row my-3" style="background-image: url('images/footer/footer2.jpg'); height:350px">
+<!-- <img src="images/footer/footer2.jpg" class="img-fluid w-100" alt="footer"> -->
+</div>
+
+
 
 </div> <!-- exit container -->
 
@@ -266,23 +277,38 @@ $pro_cont=$prod->get_all_products();
 <script type="text/javascript" src="../bootstrap4/js/jquery-3.3.1.js">
 </script>
 
-<script type="text/javascript" src="../bootstrap4/js/popper.min.js">
+<script type="text/javascript" src="../bootstrap4/js/popper.min.js"></script>
 
-$(function(){
-  $(".carted").click(function(){
-    alert("I have been clicked o!");
-    x=$(".itnum").val();
-    alert(x);
-    // $(".itnum").val()=1;
+<script type="text/javascript" src="../bootstrap4/js/bootstrap.js"></script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+
+    // to search for product and display it in product-framer
+    $('#navinput').keyup(function(){
+      var search =  $('#navinput').val();
+      // alert(searchvalue);
+
+      $('#product-framer').load("searchFT.php",{handle: search});
+    });
 
   });
 
-});
+// $(function(){
+//   $(".carted").click(function(){
+//     alert("I have been clicked o!");
+//     x=$(".itnum").val();
+//     alert(x);
+//     // $(".itnum").val()=1;
+
+
+//   });
+
+// });
 
 </script>
 
-<script type="text/javascript" src="../bootstrap4/js/bootstrap.js"></script>
+
 
 </body>
 </html>

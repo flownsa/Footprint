@@ -19,7 +19,12 @@ $addr=$_REQUEST["addr"];
 
 $cust3=new Customer;
 
-$cust3->register($fname, $gender, $nick, $ph_num, $u_pass, $email, $addr);
+$regCust = $cust3->register($fname, $gender, $nick, $ph_num, $u_pass, $email, $addr);
+
+// if ($regCust->login($email, $u_pass)===true){
+  header("location:accessrustle.php?email=$email&pwd=$u_pass");
+// }
+
 
 
 

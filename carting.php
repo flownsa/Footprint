@@ -1,12 +1,17 @@
 <?php
 session_start();
-// require("Product.php");
 require("Customer.php");
+require("Product.php");
 
-var_dump($_GET);
+// var_dump($_GET);
+$product_id = $_GET["id"];
+
+// echo $product_id;
 echo "<br>";
 echo "<br>";
-var_dump($_SESSION);
+$cust_id=$_SESSION["cust_id"];
+
+// echo "customer id ".$cust_id;
 
 // Add cart item to table
 

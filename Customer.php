@@ -2,18 +2,15 @@
 class Customer
 {
   var $db_conn;
-  var $cart_id;
-  // define("CART_ID", "$cart_id");
-
-  var $cart=[
-  CART_ID,
-  "product"=>[
-  "pro_id"=>[], "pro_price"=>[], "pro_quant"=>[]
-  ]
-
-  ];
-
   var $cust_id;
+  // define("CART_ID", "$this->cust_id");
+  var $cart=array(
+    // "cart_id"=>"",
+    "pro_id"=>[],
+    "pro_price"=>[],
+    "pro_quant"=>[]
+  );
+
   var $cust_name;
   var $cust_nick;
   var $cust_ph_num;
@@ -49,6 +46,7 @@ class Customer
     $q_exp="INSERT INTO customer SET cust_name='$c_nm', gender='$c_gn', cust_nick='$c_nk', cust_ph_num='$c_pn', cust_status='$c_st', cust_pwd='$c_pwd', cust_email='$c_em',cust_addr='$c_addr'";
 
     $this->db_conn->query($q_exp);
+
     switch($this->db_conn->affected_rows<1){
 
       case true:
@@ -57,12 +55,17 @@ class Customer
       break;
 
       default:
-    $this->cart_id=$this->cust_id=$this->db_conn->insert_id;
+      $this->cust_id=$this->db_conn->insert_id;
 
-    define("CART_ID", "$this->cart_id");
+      define("CART_ID", $this->cust_id);
+      $this->cart["cart_id"]=CART_ID;
+      $q2_exp="INSERT INTO carts SET cart_id='CART_ID'";
 
-     echo $this->cust_name ." has been successfully registered.<br>";
+      echo $this->cust_name ." has been successfully registered.<br>";
       echo "UserId = ". $this->cust_id;
+      echo"<br>";
+      echo "cartId = ". $this->cart["cart_id"];
+
 
   }
 }
@@ -101,12 +104,24 @@ class Customer
 
 
 
-function add_to_cart($pro_id, $cust_id, $pro_quant, $pro_price){
-  $this->cart["product"]["pro_id"]=$this->cust_id;
-  $this->cart["product"]["pro_quant"]=$pro_quant;
+function add_to_cart($pro_id, $pro_quant, $pro_price){
 
-  // $to_in_cart=count($this->cart);
+  // Use constant cart_id
+  $cart_id = $this->cust_id;
+  // $cart_id = $cust_id;
+  $this->cart["pro_id"][]=$pro_id;
+  $this->cart["pro_price"][]=$pro_price;
+  $this->cart["pro_quant"][]=$pro_quant;
 
+  $q_exp = "INSERT INTO cart_cust SET cart_cust_id='$cart_id', cart_prod='$pro_id', prod_worth='$pro_price', quantity='$pro_quant'";
+
+  $cart = $this->db_conn->query($q_exp);
+  if($this->db_conn->affected_rows>1){
+    return $this->cart;
+  }
+  else{
+    echo $this->db_conn->error;
+  }
 }
 
 
@@ -174,11 +189,19 @@ function add_to_cart($pro_id, $cust_id, $pro_quant, $pro_price){
 
 
 
-// $cust1=new Customer;
+$cust1=new Customer;
 // $cust2=new Customer;
 // $cust3=new Customer;
 
+// add_to_cart($pro_id, $cust_id $pro_quant, $pro_price)
+// $cust=$cust1->login('jemmiles@email.com', 'milepass');
 
+// add_to_cart($pro_id, $pro_quant, $pro_price)
+
+// $cust1->register("Otunba Adewale", "M", "detunba", "0812160311", "password", "otunba@email.com", "n0 30 Asiko Peninsula, off idi-iroko street, Somolu, Lagos");
+$cust1->register("Omosewa Olufunmi", "F", "sewa", "0812160311", "password", "sewa@email.com", "no 45 Astoniga South, off Adams Swave, Sogunle, Lagos");
+
+var_dump($cust1->add_to_cart(35, 5, 45000));
 
 // $ran=[
 // 0=>0,

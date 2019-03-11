@@ -13,10 +13,6 @@ include("metaHead.php");
       *{
         color:black;
       }
-      .prohibit_col{
-        color:red;
-        /*background-color:red;*/
-      }
       .prohibit{
         display:none;
       }
@@ -81,7 +77,7 @@ echo "<a href='footprint.php' class='btn text-dark mb-auto'>Go back to Footprint
   <form class="" action="registered.php" method="POST" id="s_form">
   <fieldset>
   <legend class="mb-4">Sign up</legend>
-<p class="alert prohibit prohibit_col alert-light" id="prohibitAlert">Error! You must enter the required fields to continue.</p>
+<p class="alert prohibit alert-danger bg-danger text-light" id="prohibitAlert">Error! You must enter the required fields to continue.</p>
     <div class="form-group">
       <label for="fnam">Fullname</label>
       <input type="text" class="form-control" id="fnam" name="fname">
@@ -172,10 +168,10 @@ $labels=["corporate",
     </div>
     <div class="form-group">
       <label for="pwd2">Confirm Password</label>
-      <input type="password" class="form-control" name="pwd" class="pwd" id="pwd2">
+      <input type="password" class="form-control" name="pwd2" class="pwd" id="pwd2">
       <button type="button" class="showpass" id="showpass2"> show</button>
     </div>
-    <p class="prohibit prohibit_col">Password mismatch please try again</p>
+    <p class="prohibit bg-danger text-ce ter text-light">Password mismatch please try again</p>
 
 
 
@@ -193,22 +189,24 @@ $labels=["corporate",
 
 <script type="text/javascript" src="../bootstrap4/js/jquery-3.3.1.js">
 </script>
-
+<script type="text/javascript" src="../bootstrap4/js/popper.min.js"></script>
+<script type="text/javascript" src="../bootstrap4/js/bootstrap.js"></script>
 <script type="text/javascript">
 //SHOW PASSWORD
 
 $(document).ready(function(){
-$(".showpass").click(function(){
+  $(".showpass").click(function(){
 
-  pass_mode=$(this).attr("type");
-  switch(pass_mode){
+     pass_mode=$(this).prev();
+    switch(pass_mode.attr("type")){
+      case "password":
+      pass_mode.attr("type", "text");
+      break;
 
-    case "password":
-    $(this).attr("type", "text");
-    break;
-    case "text":
-$(this).attr("type", "password");
-break;
+      case "text":
+      pass_mode.attr("type", "password");
+      break;
+
   }
 
 })
@@ -218,28 +216,30 @@ $("button:last").click(function(event){
   chk_fn=$("#fname").val();
   chk_addr=$("#addr").val();
   chk_u_em=$("#email").val();
-  chk_pwd=$(".pwd").val();
+  chk_pwd=$("#pwd").val();
+  chk_pwd2=$("#pwd2").val();
   chk_u_ph=$("#userphone").val();
   chk_gen=$("#gender").val();
 
 
-  // chk_pwd2=$(".pwd2").val();
+  if(chk_pwd!=chk_pwd2){
+    pwd=null;
+    $("p:last").removeClass("prohibit");
+      event.preventDefault();
 
-
-  var log=[chk_fn, chk_addr, chk_u_em, chk_u_ph, chk_pwd, chk_gen];
-  // if(chk_pwd!=chk_pwd2){
-  //   $("p:last").removeClass("prohibit");
-  //   return false;
-
-  // }
+  }
+  else if(chk_pwd==chk_pwd2){
+    pwd=chk_pwd;
+    $("p:last").addClass("prohibit");
+  }
+  var log=[chk_fn, chk_addr, chk_u_em, chk_u_ph, pwd, chk_gen];
 
 
     if(log.includes("")){
-    alert("There was an error. Please fill in the required fields");
-    $("#prohibitAlert").removeClass("prohibit");
-    event.preventDefault();
-    break;
-    return false;
+      alert("There was an error. Please fill in the required fields properly");
+      $("#prohibitAlert").removeClass("prohibit");
+      event.preventDefault();
+      // return false;
 
 
   }
@@ -255,16 +255,10 @@ $("button:last").click(function(event){
 })
 
 
-
-
-
-
-
 </script>
 
 
-<script type="text/javascript" src="../bootstrap4/js/popper.min.js"></script>
-<script type="text/javascript" src="../bootstrap4/js/bootstrap.js"></script>
+
 
 </body>
 </html>

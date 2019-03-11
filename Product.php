@@ -50,22 +50,24 @@ class Product
    function find_productByName($pr_nm)
     {
 
-    $q_exp="SELECT * FROM product WHERE pro_name LIKE '$pr_nm%'";
+    $q_exp="SELECT * FROM product WHERE pro_name LIKE '%$pr_nm%' ORDER BY pro_id DESC";
 
     $run_q=$this->db_conn->query($q_exp);
 
-    switch($run_q->num_rows<1) {
+    switch($run_q) {
 
-      case true:
+      case false:
       // echo "Product not found";
       return false;
-      break;
+      // break;
 
       default:
-      $all = $run_q->fetch_array();
+      $all = $run_q->fetch_all(MYSQLI_BOTH);
+      $total = $run_q->num_rows;
 
+      // return $all;
 
-      return $all;
+      return [$all, $total];
 }
 }
 
@@ -99,7 +101,7 @@ function remove_product($pr_id)
 
     $run_q=$this->db_conn->query($q_exp);
 
-      while($all[]=$run_q->fetch_row()){
+      while($all[]=$run_q->fetch_assoc()){
   }
   return $all;
 }
@@ -136,8 +138,34 @@ function remove_product($pr_id)
 
 
 
-// $shoe=new Product;
 
+
+$shoe=new Product;
+
+// $pro_cont=$shoe->get_all_products();
+// return [$all, $total];
+
+// echo "<pre>";
+//       print_r($pro_cont);
+//       echo "</pre>";
+
+  //   echo "<br>";
+  //   echo "<br>";
+  //   echo $pro_cont[1];
+  //   foreach($pro_cont[0] as $item) {
+      // echo "<pre>";
+      // print_r($item);
+      // echo "</pre>";
+  // }
+
+// var_dump(
+// $all=$shoe->find_productByName("nike");
+
+// echo "<pre>";
+//       print_r($all);
+//       echo "</pre>";
+
+// foreach($all as $item){
 // $shoe->views(10, 8);
 
 // $pro_na = $shoe -> remove_product(40);
