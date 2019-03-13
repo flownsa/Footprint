@@ -11,7 +11,7 @@
 
    <ul class="nav-0-list ml-auto">
       <li><a href="login&regft.php"><i class="fa fa-user"></i>&nbsp;Login / Register?</a></li>
-      <li><a href="#">Cart <i class="fa fa-shopping-cart"></i><span class="itnum"> 0</span></a></li>
+      <li><a href="#">Cart <i class="fa fa-shopping-cart"></i><span class="itnum"> </span></a></li>
 
     </ul>
 

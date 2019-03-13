@@ -5,7 +5,7 @@ class Customer
   var $cust_id;
   // define("CART_ID", "$this->cust_id");
   var $cart=array(
-    // "cart_id"=>"",
+    "cart_id"=>0,
     "pro_id"=>[],
     "pro_price"=>[],
     "pro_quant"=>[]
@@ -56,10 +56,17 @@ class Customer
 
       default:
       $this->cust_id=$this->db_conn->insert_id;
-
-      define("CART_ID", $this->cust_id);
-      $this->cart["cart_id"]=CART_ID;
-      $q2_exp="INSERT INTO carts SET cart_id='CART_ID'";
+// Create unique cart for each customer
+      $q2_exp="INSERT INTO carts SET cart_id='$this->cust_id', cart_cust='$this->cust_id'";
+      $run_q = $this->db_conn->query($q2_exp);
+      if($run_q !=false){
+        unset($this->cart["cart_id"]);
+      $this->cart["cart_id"]=$this->cust_id;
+    }
+    else{
+      echo $this->db_conn->error;
+      return false;
+    }
 
       echo $this->cust_name ." has been successfully registered.<br>";
       echo "UserId = ". $this->cust_id;
@@ -104,24 +111,26 @@ class Customer
 
 
 
-function add_to_cart($pro_id, $pro_quant, $pro_price){
+function add_to_cart($pro_id, $cust_id, $pro_price, $pro_quant)
+
+{
 
   // Use constant cart_id
-  $cart_id = $this->cust_id;
-  // $cart_id = $cust_id;
+  $this->cart["cart_id"]=$cust_id;
   $this->cart["pro_id"][]=$pro_id;
   $this->cart["pro_price"][]=$pro_price;
   $this->cart["pro_quant"][]=$pro_quant;
 
-  $q_exp = "INSERT INTO cart_cust SET cart_cust_id='$cart_id', cart_prod='$pro_id', prod_worth='$pro_price', quantity='$pro_quant'";
+  $q_exp = "INSERT INTO cart_items SET cart_cust_id='$cust_id', cart_prod='$pro_id', prod_worth='$pro_price', quantity='$pro_quant'";
 
-  $cart = $this->db_conn->query($q_exp);
-  if($this->db_conn->affected_rows>1){
+  $run_q = $this->db_conn->query($q_exp);
+  if($run_q != false){
     return $this->cart;
   }
   else{
     echo $this->db_conn->error;
   }
+
 }
 
 
@@ -199,9 +208,9 @@ $cust1=new Customer;
 // add_to_cart($pro_id, $pro_quant, $pro_price)
 
 // $cust1->register("Otunba Adewale", "M", "detunba", "0812160311", "password", "otunba@email.com", "n0 30 Asiko Peninsula, off idi-iroko street, Somolu, Lagos");
-$cust1->register("Omosewa Olufunmi", "F", "sewa", "0812160311", "password", "sewa@email.com", "no 45 Astoniga South, off Adams Swave, Sogunle, Lagos");
+// $xoc = $cust1->register("Adetutu Oludare", "F", "tutu", "08123410298", "password", "tutu@email.com", "no 45 Astoniga South, off Adams Swave, Sogunle, Lagos");
 
-var_dump($cust1->add_to_cart(35, 5, 45000));
+// var_dump($cust1->add_to_cart(35, 80, 45000, 5 ));
 
 // $ran=[
 // 0=>0,

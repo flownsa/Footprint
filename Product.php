@@ -71,7 +71,7 @@ class Product
 }
 }
 
-function remove_product($pr_id)
+protected function remove_product($pr_id)
   {
     $q_exp="DELETE FROM product WHERE pro_id=$pr_id";
 
@@ -106,7 +106,7 @@ function remove_product($pr_id)
   return $all;
 }
 
-  function add_product($pr_nm, $pr_prc, $pr_img, $pr_brn, $pr_sty, $pr_cat)
+  protected function add_product($pr_nm, $pr_prc, $pr_img, $pr_brn, $pr_sty, $pr_cat)
   {
     $q_exp="INSERT INTO product SET pro_name='$pr_nm', pro_price=$pr_prc, pro_image='$pr_img', pro_brand=$pr_brn, pro_style='$pr_sty', pro_cat=$pr_cat;";
 
@@ -140,7 +140,7 @@ function remove_product($pr_id)
 
 
 
-$shoe=new Product;
+// $shoe=new Product;
 
 // $pro_cont=$shoe->get_all_products();
 // return [$all, $total];

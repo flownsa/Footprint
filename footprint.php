@@ -230,7 +230,7 @@ $pro_cont=$prod->get_all_products();
 
     <h4 class='item-price'>&#8358;<?php echo $item["pro_price"]?></h4>
     <span class='btn btn-primary likebtn'>Like</span>
-    <a href="viewandorder.php?id=<?php echo $item["pro_id"];?>" class="text-light btn btn-outline-success">View</a>
+    <a href="viewandorder.php?id=<?php echo $item['pro_id']?>" class="text-light btn btn-outline-success">View</a>
     </div>
     </div>
     </div>

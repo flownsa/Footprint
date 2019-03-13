@@ -1,17 +1,19 @@
  <?php
 
 session_start();
-
 // var_dump($_SESSION);
 require("Product.php");
   $product = new Product;
+  // use cookies for unregistered and session for registered customers
 require("Customer.php");
   $cust = new Customer;
 require("metaHead.php");
 /*
      <!-- </head> -->
-*/
 
+*/
+     // var_dump($_GET);
+  // $pro_cart = $_GET
   $pr_id = $_GET['id'];
   // var_dump($pr_id);
 
@@ -106,14 +108,15 @@ include("footprintHeader.php"); // </head> included
 <script type="text/javascript">
 // $(document).ready(function(){
 $(function(){
-  $(".carted").click(function(){
-    // x=$(".itnum").text();
-    cart_counter=Number($(".itnum").html())+1;
-    // alert(x);
-    $(".itnum").text(cart_counter);
+  var cart_quant = 0;
+   $('#carted').click(function(){
+    // cart quantity
+      // cart_quant += 1;
+      // alert(searchvalue);
+      $('#itnum').load("carting.php",{in_cart: });
+    });
 
 
-  });
 
 });
 
